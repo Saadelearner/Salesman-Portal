@@ -1,0 +1,129 @@
+<ui-view>
+    <style>
+        #map {
+            width: 500px;
+            height: 500px;
+            margin-left: 30%;
+        }
+        table {
+        margin-left: 40px;
+        margin-top: 10px;
+        color: #333;
+        font-family: Helvetica, Arial, sans-serif;
+        width: 90%;
+        border-collapse:
+        collapse; border-spacing: 0;
+        padding: 20px 0;
+        -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.2);
+        box-shadow: 0 0 4px rgba(0,0,0,0.2);
+    }
+
+    td, th {
+        border: 1px solid transparent; /* No more visible border */
+        height: 30px;
+        transition: all 0.3s;  /* Simple transition for hover effect */
+    }
+
+    th {
+        background: #DFDFDF;  /* Darken header a bit */
+        font-weight: bold;
+        text-align: center;
+    }
+
+    td {
+        background: #FAFAFA;
+        text-align: center;
+    }
+
+    /* Cells in even rows (2,4,6...) are one color */
+    tr:nth-child(even) td { background: #F1F1F1; }
+
+    /* Cells in odd rows (1,3,5...) are another (excludes header cells)  */
+    tr:nth-child(odd) td { background: #FEFEFE; }
+
+    tr td:hover { background: #666; color: #FFF; } /* Hover cell effect! */
+
+    .face {
+        border-radius: 30px;
+        border: 1px solid #dd493b;
+        width: 48px;
+        height: 48px;
+        margin: 16px;
+    }
+    </style>
+    <div  ng-cloak ng-controller="detailCtrl">
+        <md-toolbar class="md-tall md-hue-2">
+            <span flex></span>
+            <div layout="column" class="md-toolbar-tools-bottom inset">
+                <user-avatar></user-avatar>
+                <span></span>
+                <div style="text-align: center; height: 100px"><h1>{{companyData.companyname}}</h1>
+                <h3> Company Dashboard</h3>
+               </div>
+
+            </div>
+        </md-toolbar>
+
+
+    </div>
+    <md-content class="md-padding">
+
+        <md-tabs md-dynamic-height flex class="md-accent" md-selected="data.selectedIndex" md-align-tabs="{{data.bottom ? 'bottom' : 'top'}}" md-stretch-tabs="always">
+            <md-tab id="tab1">
+                <md-tab-label>
+                Salesmen List
+                </md-tab-label>
+                <md-tab-body>
+                    <md-button type="submit" class="md-raised md-primary"  ng-click="showAdd($event,companyData._id)" >Add user</md-button>
+                    <md-content ng-repeat="item in companyusers">
+                        <md-list>
+                            <md-list-item class="md-3-line" ng-repeat="u in item.user">
+                                <img ng-src="{{$scope.usrimg}}" class="face" >
+                                <div class="md-list-item-text">
+                                    <h3>{{u.username}}</h3>
+                                    <h4>{{u.useremail}}</h4>
+
+                                </div>
+                                <md-divider md-inset ng-if="!$last"></md-divider>
+                            </md-list-item>
+                        </md-list>
+                    </md-content>
+                </md-tab-body>
+            </md-tab>
+                       <md-tab id="tab3">
+                <md-tab-label>Order List</md-tab-label>
+                <md-tab-body>
+
+                    <table>
+
+                        <tr>
+
+                            <th>Product Name</th>
+                            <th>Product Quantity</th>
+                            <th>Order Date</th>
+                            <th>Delivery Date</th>
+                            <th>Order Taken By</th>
+                            <th>Address</th>
+                            <th>Location</th>
+                        </tr>
+                        <tr ng-repeat="p in product">
+                            <td  >{{p.productname}}</td>
+                            <td>{{p.quantity}}</td>
+                            <td>{{p.orderdate| date:'shortDate'}}</td>
+                            <td>{{p.deldate | date:'shortDate'}}</td>
+                            <td>{{p.salesmanname}}</td>
+                            <td>{{p.address}}</td>
+                            <td><md-button class="secondary" ng-click="show_map(p.latpos,p.longpos)">Show Location</md-button></td>
+
+                        </tr>
+                    </table>
+
+                    <div id="map" data-tap-disabled="true">
+
+                    </div>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
+    </md-content>
+
+</ui-view>

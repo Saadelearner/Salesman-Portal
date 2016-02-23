@@ -1,0 +1,10 @@
+<md-virtual-repeat-container id="vertical-container">
+    <div md-virtual-repeat="user in userdata"
+         class="repeated-item" flex>
+        {{user.useremail}}
+    </div>
+</md-virtual-repeat-container>
+
+<ul>
+    <li ng-repeat="user in userdata">{{user.useremail}}</li>
+</ul>

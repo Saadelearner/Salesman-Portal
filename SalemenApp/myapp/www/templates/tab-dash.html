@@ -1,0 +1,24 @@
+<ion-view view-title="Dashboard">
+  <ion-content class="padding" ng-controller="DashCtrl">
+    <h2>Salesman Portal</h2>
+
+
+<form >
+          <div class="list">
+              <label class="item item-input">
+                  <span class="input-label">Email</span>
+                  <input type="text" name="email" ng-model="email">
+              </label>
+              <label class="item item-input">
+                  <span class="input-label">Password</span>
+                  <input type="password" name="password" ng-model="password">
+              </label>
+
+              <button ng-click="submit()" class="button button-positive">
+                  login
+              </button>
+
+             </div>
+</form>
+  </ion-content>
+</ion-view>

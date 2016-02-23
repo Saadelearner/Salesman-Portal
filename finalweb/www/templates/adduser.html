@@ -1,0 +1,20 @@
+<ui-view>
+
+    <div layout-gt-sm="column" ng-controller="adduserCtrl"><form >
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Name</label>
+            <input ng-model="username" name="username">
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Email</label>
+            <input ng-model="useremail" name="useremail">
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Password</label>
+            <input ng-model="userpassword" name="userpassword">
+        </md-input-container>
+        <md-button type="submit" class="md-raised md-primary" ng-click="adduser()" >Add user</md-button>
+    </form>
+    </div>
+
+</ui-view>

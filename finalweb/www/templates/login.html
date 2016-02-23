@@ -1,0 +1,39 @@
+<head><style>
+
+    .container {
+
+        width: 600px;
+
+        margin: 0 auto;
+
+        background: #ffffff;
+        padding: 20px 0;
+        -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.2);
+
+        box-shadow: 0 0 4px rgba(0,0,0,0.2);
+
+    }</style></head>
+
+<ui-view >
+    <br><br>
+    <div  class="container" layout-gt-sm="column" ng-controller="loginCtrl"><form >
+        <md-toolbar class="md-tall md-accent">
+            <h2 class="md-toolbar-tools">
+                <span>Administrator</span>
+            </h2>
+        </md-toolbar>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Email</label>
+            <input ng-model="user.email">
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Password</label>
+            <input type="password" ng-model="user.password">
+        </md-input-container>
+        <md-button class="md-raised md-primary" ng-click="login()">Portal Administrator Login</md-button>
+        <md-button class="md-raised md-primary" ng-click="companylogin()">Company Administrator Login</md-button>
+    </form>
+    </div>
+<p>{{data}}</p>
+
+</ui-view>

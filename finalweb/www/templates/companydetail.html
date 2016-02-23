@@ -1,0 +1,194 @@
+<ui-view >
+<style>
+   .mainform{
+       width: 600px;
+
+       margin: 0 auto;
+
+       background: #ffffff;
+       padding: 20px 0;
+       -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.2);
+
+       box-shadow: 0 0 4px rgba(0,0,0,0.2);
+
+   }
+   md-content {
+       background-color: #ECEFF1!important;
+  width: 600px;
+
+   }
+   .selected-item ~ .item .user,
+   .item:first-child .user {
+       border-top-left-radius: 2px;
+       border-top-right-radius: 2px;
+   }
+   .selected-item ~ .item .user.selected,
+   .item:first-child .user.selected {
+       margin-top: 0;
+   }
+   .item:last-child .user {
+       border-bottom-left-radius: 2px;
+       border-bottom-right-radius: 2px;
+   }
+   .item .tile .folded {
+       cursor: pointer;
+   }
+   .item .user {
+       background-color: white;
+       transition: all 500ms;
+   }
+   .item .user h3,
+   .item .user p {
+       transition: all 500ms;
+   }
+   .item .user p {
+       opacity: 1;
+       height: inherit;
+   }
+   .item .user p.ng-hide {
+       opacity: 0;
+       height: 0;
+   }
+   .item .user.selected {
+       margin: 30px -15px;
+       border-radius: 2px;
+   }
+   .item .user.selected .expanded {
+       visibility: visible;
+   }
+   .item .user.selected .expanded,
+   .item .user.selected .expanded > * {
+       max-height: 700px;
+       opacity: 1;
+   }
+   .item .user.selected .expanded .md-label {
+       border: hidden;
+   }
+   .item .user.selected h3 {
+       font-size: 1.8em;
+   }
+   .item .user .expanded {
+       visibility: hidden;
+   }
+   .item .user .expanded,
+   .item .user .expanded > * {
+       max-height: 0;
+       height: auto;
+       opacity: 0;
+       transition: all 500ms;
+   }
+   .item .user .expanded .split {
+       padding: 10px;
+   }
+   .item .user .face {
+       border-radius: 30px;
+       border: 1px solid #dd493b;
+       width: 48px;
+       height: 48px;
+       margin: 16px;
+   }
+
+
+
+
+</style>
+
+    <div class="cant" layout-gt-sm="column" ng-controller="companyCtrl">
+
+        <md-toolbar class="md-tall md-hue-2">
+            <span flex></span>
+            <div layout="column" class="md-toolbar-tools-bottom inset">
+                <user-avatar></user-avatar>
+                <span></span>
+                <div style="text-align: center; height: 100px"><h1>Administrator Dashboard</h1></div>
+
+            </div>
+        </md-toolbar>
+
+
+        <div class="mainform"><form >
+         <div class="tools">   <md-toolbar  layout="row" layout-align="start center"
+                         class="md-toolbar-tools md-whiteframe-z2">
+                <div class="md-toolbar-tools">
+
+                    <h3>
+                     ADD COMPANY
+                    </h3>
+                    <span flex></span>
+
+
+                   </div></md-toolbar></div>
+
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Name</label>
+            <input ng-model="companyname" name="companyname">
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Email</label>
+            <input ng-model="companyemail" name="companyemail">
+        </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Password</label>
+                <input ng-model="companypwd" name="companypwd">
+            </md-input-container>
+
+        <md-button type="submit" class="md-raised md-primary" ng-click="addcompany()" >Add Company</md-button>
+    </form></div>
+<br /><br />
+        <md-toolbar md-scroll-shrink ng-if="true" style="width: 56%; margin-left: 20%">
+            <div class="md-toolbar-tools">
+                <h3>
+                    <span>Company Details</span>
+                </h3>
+            </div>
+        </md-toolbar>
+
+            <div flex="70" class="content" ui-view  style="margin-left: 20%">
+                <md-item ng-repeat="data in companydata" class="item"
+                         ng-class="{ 'selected-item': $index == selectedUserIndex}">
+                    <md-item-content class="user tile md-whiteframe-z1"
+                                     ng-class="{ 'selected md-whiteframe-z2': $index == selectedUserIndex}"
+                                     layout="column">
+                        <div layout="row" layout-fill ng-click="selectUserIndex($index,data._id)" class="folded">
+                            <div class="md-tile-left">
+                                <img ng-src="{{ img }}" class="face">
+                            </div>
+                            <div class="md-tile-content" layout="column" layout-align="center start">
+                                <h3>{{data.companyname }}  </h3>
+
+                                <p ng-hide="$index == selectedUserIndex">
+                                    <span>{{data.Email}}</span>
+                                </p>
+                            </div>
+                        </div>
+                     <span style="margin-left: 35%">   <md-button class="md-raised" ng-click="showAdd($event,data._id)">Add Salesman</md-button>
+                       </span>
+
+                        <md-divider layout-fill ng-show="$index == selectedUserIndex"></md-divider>
+                        <div layout="column" layout-fill class="expanded"  >
+                            <md-toolbar class="md-theme-light">
+                                <h2 class="md-toolbar-tools">
+                                    <span>{{data.companyname}}<span><h3>SALESMEN</h3></span></span>
+                                </h2>
+                            </md-toolbar>
+                            <md-list ng-repeat="data in companyusers">
+                                <md-list-item class="md-3-line" ng-repeat="u in data.user">
+                                    <img ng-src="{{$scope.usrimg}}" class="face" >
+                                    <div class="md-list-item-text">
+                                        <h3>{{u.username}}</h3>
+                                        <h4>{{u.useremail}}</h4>
+                                        </div>
+
+                                    <md-divider md-inset ng-if="!$last"></md-divider>
+                                </md-list-item>
+                            </md-list>
+                        </div>
+                    </md-item-content>
+                    <md-divider class="divider-inset" ng-if="!$last"></md-divider>
+                </md-item>
+            </div>
+
+
+
+
+</div></ui-view>

@@ -1,0 +1,60 @@
+<ion-view class="card" view-title=Dashboard >
+    <style>
+        #map {
+            width: 500px;
+            height: 500px;
+        }
+    </style>
+  <ion-content>
+
+      <div class="list list-inset" ng-controller="AccountCtrl" ng-repeat="c in company"><div>
+
+{{c.companyname}}
+
+
+          <label class="item item-input">
+              <input type="text" placeholder="Product Name" ng-model="name">
+          </label>
+         <span> <label class="item item-input">
+              <input type="number" placeholder="Product Quantity" ng-model="pquantity">
+          </label></span>
+          <span class="list">
+              <label class="item item-input">
+                  <input type="date" placeholder="Delivery Date" ng-model="pdate">
+              </label>
+               <label class="item item-input">
+                   <input type="text" placeholder="Enter Address" ng-model="paddress">
+               </label>
+
+
+  <button class="button button-positive" ng-click="show_map();showDetails = ! showDetails">
+      Show Map
+  </button>
+        </span>
+          <button class="button button-positive" ng-click="submitorder(c._id);">
+             Submit Order
+          </button>
+
+      </div>
+
+
+          <div id="map" ng-show="showDetails" data-tap-disabled="true"  >
+
+          </div>
+
+
+
+
+
+
+  </div>
+
+
+
+
+
+
+
+  </ion-content>
+
+</ion-view>
